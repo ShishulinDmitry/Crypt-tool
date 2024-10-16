@@ -111,7 +111,6 @@ void decrypt_file(const char *input_file, const char *output_file, const unsigne
     while (fread(in_block, sizeof(char), BLOCK_SIZE / 8, in_fp) == BLOCK_SIZE / 8) {
         AES_cbc_encrypt(in_block, out_block, BLOCK_SIZE / 8, &aes_key, iv, AES_DECRYPT);
         fwrite(out_block, sizeof(char), BLOCK_SIZE / 8, out_fp);
-        printf("8 bytes read\n");
     }
 
     fclose(in_fp);
