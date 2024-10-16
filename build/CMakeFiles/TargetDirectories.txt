@@ -1,3 +1,0 @@
-/home/cerberus/laba2/build/CMakeFiles/crypt_tool.dir
-/home/cerberus/laba2/build/CMakeFiles/edit_cache.dir
-/home/cerberus/laba2/build/CMakeFiles/rebuild_cache.dir

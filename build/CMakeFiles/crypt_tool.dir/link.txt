@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/crypt_tool.dir/source/main.c.o CMakeFiles/crypt_tool.dir/source/cryptkey.c.o -o crypt_tool  /usr/lib/x86_64-linux-gnu/libcrypto.so 
