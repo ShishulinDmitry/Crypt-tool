@@ -1,0 +1,114 @@
+\hypertarget{cryptkey_8c}{}\doxysection{source/cryptkey.c File Reference}
+\label{cryptkey_8c}\index{source/cryptkey.c@{source/cryptkey.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/aes.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/rand.\+h$>$}\newline
+Include dependency graph for cryptkey.\+c\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cryptkey_8c_a2d996237e082b78b41771b5aa1a6eae1}\label{cryptkey_8c_a2d996237e082b78b41771b5aa1a6eae1}} 
+\#define \mbox{\hyperlink{cryptkey_8c_a2d996237e082b78b41771b5aa1a6eae1}{KEY\+\_\+\+SIZE}}~256
+\begin{DoxyCompactList}\small\item\em key size in bits (32 bytes) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cryptkey_8c_ad51ded0bbd705f02f73fc60c0b721ced}\label{cryptkey_8c_ad51ded0bbd705f02f73fc60c0b721ced}} 
+\#define \mbox{\hyperlink{cryptkey_8c_ad51ded0bbd705f02f73fc60c0b721ced}{BLOCK\+\_\+\+SIZE}}~128
+\begin{DoxyCompactList}\small\item\em block size in bits (16 bytes) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{cryptkey_8c_a39d5857e66e7ae705b0f1776ebc5d607}{generate\+\_\+key}} (const char $\ast$password, const unsigned char $\ast$key)
+\begin{DoxyCompactList}\small\item\em The function that generates a key based on entered password Creating a key based on a hash of a password\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cryptkey_8c_a9fcfb392dc8bb7998166099a612f34b0}{encrypt\+\_\+file}} (const char $\ast$input\+\_\+file, const char $\ast$output\+\_\+file, const unsigned char $\ast$key)
+\begin{DoxyCompactList}\small\item\em The function encrypts a file using the AES algorithm in CBC mode Algorithm\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cryptkey_8c_a71db5cc45261ad72b8e4407ce3692ce9}{decrypt\+\_\+file}} (const char $\ast$input\+\_\+file, const char $\ast$output\+\_\+file, const unsigned char $\ast$key)
+\begin{DoxyCompactList}\small\item\em The function decrypts a file using the AES algorithm in CBC mode Algorithm\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{cryptkey_8c_a71db5cc45261ad72b8e4407ce3692ce9}\label{cryptkey_8c_a71db5cc45261ad72b8e4407ce3692ce9}} 
+\index{cryptkey.c@{cryptkey.c}!decrypt\_file@{decrypt\_file}}
+\index{decrypt\_file@{decrypt\_file}!cryptkey.c@{cryptkey.c}}
+\doxysubsubsection{\texorpdfstring{decrypt\_file()}{decrypt\_file()}}
+{\footnotesize\ttfamily void decrypt\+\_\+file (\begin{DoxyParamCaption}\item[{const char $\ast$}]{input\+\_\+file,  }\item[{const char $\ast$}]{output\+\_\+file,  }\item[{const unsigned char $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+The function decrypts a file using the AES algorithm in CBC mode Algorithm\+: 
+
+
+\begin{DoxyItemize}
+\item Creating a key based on a hash of a password\+:
+\item The objects {\ttfamily AES\+\_\+\+KEY}, {\ttfamily iv}, {\ttfamily in\+\_\+block}, {\ttfamily out\+\_\+block}, as well as the files {\ttfamily in\+\_\+fp} and {\ttfamily out\+\_\+fp} are created.
+\item The success of opening the input and output files is checked using {\ttfamily fopen}.
+\item If the files cannot be opened, an error is displayed and the program terminates.
+\item Reading the initialization vector from the beginning of the input file using {\ttfamily fread}.
+\item Setting the decryption key using {\ttfamily AES\+\_\+set\+\_\+decrypt\+\_\+key}.
+\item Loop through 16-\/byte blocks of data from the input file.
+\item Decrypt each block using {\ttfamily AES\+\_\+cbc\+\_\+encrypt} and write the decrypted block to the output file.
+\item Close files using {\ttfamily fclose} 
+\begin{DoxyParams}{Parameters}
+{\em input\+\_\+file} & Pointer to a string containing the name of the input file. \\
+\hline
+{\em output\+\_\+file} & Ppointer to a string containing the name of the output file. \\
+\hline
+{\em key} & Pointer to an array of 32 bytes containing the encryption key. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\mbox{\Hypertarget{cryptkey_8c_a9fcfb392dc8bb7998166099a612f34b0}\label{cryptkey_8c_a9fcfb392dc8bb7998166099a612f34b0}} 
+\index{cryptkey.c@{cryptkey.c}!encrypt\_file@{encrypt\_file}}
+\index{encrypt\_file@{encrypt\_file}!cryptkey.c@{cryptkey.c}}
+\doxysubsubsection{\texorpdfstring{encrypt\_file()}{encrypt\_file()}}
+{\footnotesize\ttfamily void encrypt\+\_\+file (\begin{DoxyParamCaption}\item[{const char $\ast$}]{input\+\_\+file,  }\item[{const char $\ast$}]{output\+\_\+file,  }\item[{const unsigned char $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+The function encrypts a file using the AES algorithm in CBC mode Algorithm\+: 
+
+
+\begin{DoxyItemize}
+\item Opens the input (input\+\_\+file) and output (output\+\_\+file) files for reading and writing, respectively
+\item Generates a random initialization vector (IV) using the RAND\+\_\+bytes function.
+\item Sets the key for encryption using AES\+\_\+set\+\_\+encrypt\+\_\+key.
+\item Writes the IV to the beginning of the output file.
+\item Reads the input file in blocks of BLOCK\+\_\+\+SIZE / 8 bytes.
+\item Encrypts each block using the AES\+\_\+cbc\+\_\+encrypt function in CBC mode.
+\item Writes the encrypted block to the output file.
+\item Closes the input and output files. 
+\begin{DoxyParams}{Parameters}
+{\em input\+\_\+file} & Pointer to a string containing the name of the input file. \\
+\hline
+{\em output\+\_\+file} & Ppointer to a string containing the name of the output file. \\
+\hline
+{\em key} & Pointer to an array of 32 bytes containing the encryption key. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\mbox{\Hypertarget{cryptkey_8c_a39d5857e66e7ae705b0f1776ebc5d607}\label{cryptkey_8c_a39d5857e66e7ae705b0f1776ebc5d607}} 
+\index{cryptkey.c@{cryptkey.c}!generate\_key@{generate\_key}}
+\index{generate\_key@{generate\_key}!cryptkey.c@{cryptkey.c}}
+\doxysubsubsection{\texorpdfstring{generate\_key()}{generate\_key()}}
+{\footnotesize\ttfamily void generate\+\_\+key (\begin{DoxyParamCaption}\item[{const char $\ast$}]{password,  }\item[{const unsigned char $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+The function that generates a key based on entered password Creating a key based on a hash of a password\+: 
+
+
+\begin{DoxyItemize}
+\item Calculates the hash of the password using the SHA-\/256 algorithm.
+\item Copies the hash result to the key array.
+\item Uses the EVP\+\_\+\+Digest function from the Open\+SSL library to calculate the hash.
+\item EVP\+\_\+\+Digest\+: a function from the Open\+SSL library for calculating cryptographic hashes.
+\item EVP\+\_\+sha256()\+: function that provides context for calculating the SHA-\/256 hash. 
+\begin{DoxyParams}{Parameters}
+{\em password} & pointer to the string containing the password to generate the key \\
+\hline
+{\em key} & pointer to an array of unsigned char where the generated key will be written \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

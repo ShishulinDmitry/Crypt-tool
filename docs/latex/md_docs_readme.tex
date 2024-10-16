@@ -1,0 +1,29 @@
+\hypertarget{md_docs_readme_autotoc_md1}{}\doxysection{Description}\label{md_docs_readme_autotoc_md1}
+The program implements a simple utility for encrypting and decrypting files using the AES algorithm in CBC (Cipher Block Chaining) mode. The encryption key is generated based on the hash of the transferred password. \hypertarget{md_docs_readme_autotoc_md2}{}\doxysection{Installation}\label{md_docs_readme_autotoc_md2}
+\hypertarget{md_docs_readme_autotoc_md3}{}\doxysubsection{Requirements}\label{md_docs_readme_autotoc_md3}
+
+\begin{DoxyItemize}
+\item CMake (3.\+5)
+\item Open\+SSL
+\item C compiler (GCC) 
+\end{DoxyItemize}\hypertarget{md_docs_readme_autotoc_md4}{}\doxysubsection{Building the project}\label{md_docs_readme_autotoc_md4}
+
+\begin{DoxyEnumerate}
+\item Clone the repository\+: git clone $<$\+URL$>$
+\item Build (UNIX) cd file\+\_\+encryptor mkdir build cd build cmake .. make 
+\end{DoxyEnumerate}\hypertarget{md_docs_readme_autotoc_md5}{}\doxysection{Usage}\label{md_docs_readme_autotoc_md5}
+\hypertarget{md_docs_readme_autotoc_md6}{}\doxysubsection{File encryption}\label{md_docs_readme_autotoc_md6}
+./crypt\+\_\+tool -\/e -\/f $<$input file$>$ -\/o$<$output file$>$ -\/p $<$password$>$
+\begin{DoxyItemize}
+\item -\/e\+: encryption option.
+\item -\/f $<$input\+\_\+file$>$\+: file name to encrypt.
+\item -\/o $<$output\+\_\+file$>$\+: encrypted file name.
+\item -\/p $<$password$>$\+: password for key generation. Example\+: ./crypt\+\_\+tool -\/e -\/f file -\/o encrypted\+\_\+file -\/p passwd
+\end{DoxyItemize}\hypertarget{md_docs_readme_autotoc_md7}{}\doxysubsection{Decrypting a file}\label{md_docs_readme_autotoc_md7}
+./crypt\+\_\+tool -\/d -\/f $<$input file$>$ -\/o$<$output file$>$ -\/p $<$password$>$
+\begin{DoxyItemize}
+\item -\/d\+: decryption option.
+\item -\/f $<$input\+\_\+file$>$\+: file name to decrypt.
+\item -\/o $<$output\+\_\+file$>$\+: decrypted file name.
+\item -\/p $<$password$>$\+: password for key generation. Example\+: ./crypt\+\_\+tool -\/d -\/f encrypted\+\_\+file -\/o decrypted\+\_\+file -\/p passwd 
+\end{DoxyItemize}
