@@ -10,11 +10,17 @@ The program implements a simple utility for encrypting and decrypting files usin
 1. Clone the repository:
 git clone <URL>
 2. Build (UNIX)
+   
 cd file_encryptor
+
 mkdir build
+
 cd build
+
 cmake ..
+
 make
+
 ## Usage
 ### Syntax
 crypt_tool -e/d -f <filename> -o <filename> -p <password>
