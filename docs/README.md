@@ -26,6 +26,7 @@ crypt_tool -e/d -f <filename> -o <filename> -p <password>
 - -p <password>: password for key generation.
 
 Example:
+
 ./crypt_tool -e -f file -o encrypted_file -p passwd
 
 ### Decrypting a file
@@ -36,4 +37,5 @@ Example:
 - -p <password>: password for key generation.
 
 Example:
+
 ./crypt_tool -d -f encrypted_file -o decrypted_file -p passwd
